@@ -12,13 +12,68 @@ class BotonesPage extends StatelessWidget {
             _fondoApp(),
             SingleChildScrollView(
               child: Column(
-                children: [_titulos()],
+                children: [_titulos(), _botonesRedondeados()],
               ),
             ),
           ],
         ),
       ),
       bottomNavigationBar: _bottomNavigatorBar(context),
+    );
+  }
+
+  Widget _botonesRedondeados(){
+    return Table(
+      children: <TableRow>[
+        TableRow(
+          children: <Widget>[
+            _crearBotonRedondeado(),
+            _crearBotonRedondeado()
+          ]
+        ),
+        TableRow(
+          children: <Widget>[
+            _crearBotonRedondeado(),
+            _crearBotonRedondeado()
+          ]
+        ),
+        TableRow(
+          children: <Widget>[
+            _crearBotonRedondeado(),
+            _crearBotonRedondeado()
+          ]
+        ),
+        TableRow(
+          children: <Widget>[
+            _crearBotonRedondeado(),
+            _crearBotonRedondeado()
+          ]
+        ),
+      ],
+    );
+  }
+
+  Widget _crearBotonRedondeado(){
+    return Container(
+      height: 180.0,
+      margin: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(62, 66, 107, 0.7),
+        borderRadius: BorderRadius.circular(20.0)
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          SizedBox(height: 5.0),
+          CircleAvatar(
+            backgroundColor: Colors.pinkAccent,
+            radius: 35.0,
+            child: Icon(Icons.swap_horiz, color: Colors.white, size: 30.0,),
+          ),
+          Text("Hola", style: TextStyle(color: Colors.pinkAccent)),
+          SizedBox(height: 5.0),
+        ],
+      ),
     );
   }
 
