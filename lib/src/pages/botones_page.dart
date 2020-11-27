@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -22,57 +23,57 @@ class BotonesPage extends StatelessWidget {
     );
   }
 
-  Widget _botonesRedondeados(){
+  Widget _botonesRedondeados() {
     return Table(
       children: <TableRow>[
-        TableRow(
-          children: <Widget>[
-            _crearBotonRedondeado(),
-            _crearBotonRedondeado()
-          ]
-        ),
-        TableRow(
-          children: <Widget>[
-            _crearBotonRedondeado(),
-            _crearBotonRedondeado()
-          ]
-        ),
-        TableRow(
-          children: <Widget>[
-            _crearBotonRedondeado(),
-            _crearBotonRedondeado()
-          ]
-        ),
-        TableRow(
-          children: <Widget>[
-            _crearBotonRedondeado(),
-            _crearBotonRedondeado()
-          ]
-        ),
+        TableRow(children: <Widget>[
+          _crearBotonRedondeado(Colors.blue, Icons.border_all, "General"),
+          _crearBotonRedondeado(Colors.purpleAccent, Icons.directions, "Direction"),
+        ]),
+        TableRow(children: <Widget>[
+          _crearBotonRedondeado(Colors.greenAccent, Icons.home, "Casa"),
+          _crearBotonRedondeado(Colors.amberAccent, Icons.access_alarm, "Alarma"),
+        ]),
+        TableRow(children: <Widget>[
+          _crearBotonRedondeado(Colors.deepOrangeAccent, Icons.account_circle, "Perfil"),
+          _crearBotonRedondeado(Colors.redAccent, Icons.favorite_border, "Corazòn"),
+        ]),
+        TableRow(children: <Widget>[
+          _crearBotonRedondeado(Colors.indigoAccent, Icons.flight_takeoff, "Viaje Salida"),
+          _crearBotonRedondeado(Colors.deepPurpleAccent, Icons.flight_land, "Viaje LLegada"),
+        ]),
       ],
     );
   }
 
-  Widget _crearBotonRedondeado(){
-    return Container(
-      height: 180.0,
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: Color.fromRGBO(62, 66, 107, 0.7),
-        borderRadius: BorderRadius.circular(20.0)
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          SizedBox(height: 5.0),
-          CircleAvatar(
-            backgroundColor: Colors.pinkAccent,
-            radius: 35.0,
-            child: Icon(Icons.swap_horiz, color: Colors.white, size: 30.0,),
+  Widget _crearBotonRedondeado(Color color, IconData icono, String texto) {
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
+        child: Container(
+          height: 180.0,
+          margin: EdgeInsets.all(15.0),
+          decoration: BoxDecoration(
+              color: Color.fromRGBO(62, 66, 107, 0.7),
+              borderRadius: BorderRadius.circular(20.0)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SizedBox(height: 5.0),
+              CircleAvatar(
+                backgroundColor: color,
+                radius: 35.0,
+                child: Icon(
+                  icono,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+              ),
+              Text(texto, style: TextStyle(color: color)),
+              SizedBox(height: 5.0),
+            ],
           ),
-          Text("Hola", style: TextStyle(color: Colors.pinkAccent)),
-          SizedBox(height: 5.0),
-        ],
+        ),
       ),
     );
   }
@@ -80,19 +81,24 @@ class BotonesPage extends StatelessWidget {
   Widget _bottomNavigatorBar(BuildContext context) {
     return new Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
-          primaryColor: Colors.pinkAccent,
-          textTheme: Theme.of(context).textTheme
-            .copyWith( caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0)) )
-        ),
+            canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
+            primaryColor: Colors.pinkAccent,
+            textTheme: Theme.of(context).textTheme.copyWith(
+                caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0)))),
         child: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today, size: 30.0,), title: Container(), ),
+              icon: Icon(
+                Icons.calendar_today,
+                size: 30.0,
+              ),
+              title: Container(),
+            ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.insert_chart, size: 30.0), title: Container()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.supervised_user_circle, size: 30.0), title: Container()),
+                icon: Icon(Icons.supervised_user_circle, size: 30.0),
+                title: Container()),
           ],
         ));
   }
